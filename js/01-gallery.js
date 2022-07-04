@@ -48,11 +48,17 @@ function openModalWindow() {
   if (event.target.nodeName !== "IMG") {
     return;
   }
-  modalWindow = basicLightbox.create(`<img  src="${largeImgUrl}">`);
+  modalWindow = basicLightbox.create(`<img  src="${largeImgUrl}">`, {
+    onShow: () => {
+      document.addEventListener("keydown", closeModalWindowOnKey);
+    },
+    onClose: () => {
+      document.addEventListener("keydown", removeEventKeyUp);
+    },
+  });
   modalWindow.show();
 }
 
-document.addEventListener("keydown", closeModalWindowOnKey);
 function closeModalWindowOnKey(event) {
   if (event.code === "Escape") {
     modalWindow.close();
@@ -61,7 +67,6 @@ function closeModalWindowOnKey(event) {
   console.log(event.code);
 }
 
-document.addEventListener("keydown", removeEventKeyUp);
 function removeEventKeyUp() {
   if (modalWindow === "") {
     document.removeEventListener("keydown", closeModalWindowOnKey);

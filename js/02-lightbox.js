@@ -8,9 +8,6 @@ const galleryItemsMarkup = itemsMarkup(galleryItems);
 // Рендеринг разметки
 galleryRef.insertAdjacentHTML("afterbegin", galleryItemsMarkup);
 
-//Слушатели событий
-galleryRef.addEventListener("click", openModalWindow);
-
 // Функции колл-бэки
 function itemsMarkup(object) {
   return object
@@ -29,7 +26,3 @@ const modalWindow = new SimpleLightbox(".gallery a", {
   captionDelay: "250",
 });
 console.log(modalWindow);
-
-function openModalWindow(event) {
-  event.preventDefault();
-}
